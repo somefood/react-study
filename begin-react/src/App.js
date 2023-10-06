@@ -18,7 +18,8 @@ function App() {
   return (
     <>
       <Wrapper>
-        <Hello name="react" color="red" />
+        <Hello name="react" color="red" isSpecial={true} />
+        <Hello name="react" color="yellow" isSpecial /> {/* 이름만 작성하면 true로 설정한걸로 간주 */}
         <Hello color="pink" />
       </Wrapper>
     </>
