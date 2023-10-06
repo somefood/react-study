@@ -1,5 +1,6 @@
 import React from "react";
 import Hello from "./Hello";
+import Wrapper from "./Wrapper";
 import './App.css';
 
 // 닫힌 태그는 꼭 존재해야함 또는 Auto Closing
@@ -16,13 +17,10 @@ function App() {
   };
   return (
     <>
-      {/* 이 주석은 화면에 보이지 않음 */}
-      /* 중괄호로 안 감싸면 이렇게 보임..! */
-      <Hello
-        // 열리는 태그 내부에서 이렇게 주석 작성 가능~!
-      />
-      <div style={style}>{name}</div>
-      <div className="gray-box"></div> {/* camelCase 로 주기 */}
+      <Wrapper>
+        <Hello name="react" color="red" />
+        <Hello color="pink" />
+      </Wrapper>
     </>
   );
 }
