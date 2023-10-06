@@ -1,15 +1,12 @@
-import React, {useRef, useState} from "react";
-import Hello from "./Hello";
-import Wrapper from "./Wrapper";
-import './App.css';
-import Counter from "./Counter";
-import InputSample from "./InputSample";
-import UserList from "./UserList";
-import CreateUser from "./CreateUser";
+import React, { useRef, useState, useMemo } from 'react';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
 
-// 닫힌 태그는 꼭 존재해야함 또는 Auto Closing
-// 두 개 이상의 태그는 무조건 하나의 태그로 감싸져야 하기에 <></> (Fragment)로 감싸기!
-// JSX 내부에 자바스크립트 변수는 {} 안에 감싸서 보여주기
+function countActiveUsers(users) {
+  console.log('활성 사용자 수를 세는중...');
+  return users.filter(user => user.active).length;
+}
+
 function App() {
   const [inputs, setInputs] = useState({
     username: '',
@@ -65,7 +62,6 @@ function App() {
     // = user.id 가 id 인 것을 제거함
     setUsers(users.filter(user => user.id !== id));
   };
-
   const onToggle = id => {
     setUsers(
       users.map(user =>
@@ -73,7 +69,7 @@ function App() {
       )
     );
   };
-
+  const count = useMemo(() => countActiveUsers(users), [users]);
   return (
     <>
       <CreateUser
@@ -83,6 +79,7 @@ function App() {
         onCreate={onCreate}
       />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성사용자 수 : {count}</div>
     </>
   );
 }
