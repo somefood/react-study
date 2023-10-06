@@ -1,14 +1,25 @@
-import React, {useState} from "react";
+import React, {useReducer, useState} from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+}
 
 function Counter() {
 
-  const [number, setNumber] = useState(0); // useState(기본값 초기화), 배열이 반환되며 첫번째는 현재 상태, 두번째는 Setter 함수
+  const [number, dispatch] = useReducer(reducer, 0);
   const onIncrease = () => {
-    setNumber(prevState => prevState + 1);
+    dispatch({ type: 'INCREMENT' });
   }
 
   const onDecrease = () => {
-    setNumber(prevState => prevState - 1);
+    dispatch({ type: 'DECREMENT' });
   }
 
   return (
