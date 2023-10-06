@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import Hello from "./Hello";
 import Wrapper from "./Wrapper";
 import './App.css';
@@ -10,8 +10,32 @@ import UserList from "./UserList";
 // 두 개 이상의 태그는 무조건 하나의 태그로 감싸져야 하기에 <></> (Fragment)로 감싸기!
 // JSX 내부에 자바스크립트 변수는 {} 안에 감싸서 보여주기
 function App() {
+  const users = [
+    {
+      id: 1,
+      username: 'velopert',
+      email: 'public.velopert@gmail.com'
+    },
+    {
+      id: 2,
+      username: 'tester',
+      email: 'tester@example.com'
+    },
+    {
+      id: 3,
+      username: 'liz',
+      email: 'liz@example.com'
+    }
+  ];
+
+  const nextId = useRef(4); // useRef(.current의 기본값)
+  const onCreate = () => {
+
+    nextId.current += 1;
+  }
+
   return (
-    <UserList/>
+    <UserList users={users}/>
   );
 }
 
